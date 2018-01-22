@@ -1,0 +1,107 @@
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select{margin:0;padding:0} 
+body{font:12px "微软雅黑","Arial Narrow",HELVETICA;background:#fff;}
+a{color:#172c45;text-decoration:none} 
+em{font-style:normal}
+li{list-style:none}
+img{border:0;display:block} 
+table{border-collapse:collapse;border-spacing:0}
+p{word-wrap:break-word}
+header,article,aside,section,footer,nav,figure,main{display:block;}
+
+/*----------------------------------head--------------------------------------*/
+.headWrap{
+	box-sizing:border-box;
+	width:100%;
+	height:40px;
+	background:#f69686;
+}
+.head_top{
+	height:40px;
+	margin:0 auto;
+}
+#red_bar_td{
+	font-size:18px;
+	line-height:36px;
+	text-align:center;
+	color:#FFFF00;
+}	
+.head_middle{
+	width:950px;
+	margin:0 auto;
+	/*border:1px solid #f00;*/
+	height:28px;
+	background:url(../images/index/head/top_area_bg_t.jpg);
+	overflow:hidden;
+}
+.head_middle ul{
+	float:right;
+}
+.head_middle ul li{
+	line-height:30px;
+	float:left;
+	padding: 0 5px
+}
+.head_middle ul li a{
+	padding-right:5px;
+}
+.head_middle img{
+	float:right;
+	margin:8px 20px 0 0;
+}
+.head_middle_country{
+	float:left;
+	width:150px;
+	height:24px;
+	line-height:24px;
+	margin-left:20px
+}
+.head_middle_language{
+	float:left;
+	width:150px;
+	height:24px;
+	line-height:24px;
+}
+.head_middle_language a{
+	padding-left:10px;
+}
+.head_bottom{
+	width:950px;
+	height:75px;
+	margin:0 auto;
+	background: url(../images/index/head/top_area_bg_b.jpg);
+}
+.head_bottom img{
+	float:left;
+}
+.head_bottom_wrap{
+	height:75px;
+	width:100%;
+	background:#93846F;
+}
+#head_myshopcar{
+	width:257px;
+	height:70px;
+	float:right;
+	margin-right:20px;
+	border:2px solid #ccc;
+	border-radius: 6px;
+}
+#head_myshopcar img{
+	margin :5px 0 0 5px;
+}
+#head_myshopcar ul{
+	margin:8px 10px 0 0 ;
+	float: right;
+}
+#head_myshopcar ul li a{
+	font-weight: bold;
+	color : white;
+	display:inline-block;
+	float: right;
+	margin-top:2px;
+}
+#head_myshopcar ul li:last-child a{
+	display:inline-block;
+	color:#dfc3b8;
+}
+
