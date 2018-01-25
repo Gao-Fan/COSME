@@ -3,22 +3,53 @@ window.onload= function(){
 	new BodyTop().init();    //最上端置顶
 	new LunBo().init();       //轮播图
 	new PaiList().init();    //sideNav
+	new shpLiF();
+	new EndBanner().init();
+	new GetName().init();
 }
+//得到时间
+	function GetName(){
+		this.init = function(){
+			setInterval( this.time , 1000 )
+		}
+		this.time = function(){
+			var d = new Date();
+			var y = d.getFullYear();
+			var m = d.getMonth()+1;
+			var h = d.getHours();
+			var min = d.getMinutes();
+			var s = d.getSeconds()
+			var _date = toTwo(d.getDate())
+			var html = ""
+			var arr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+			html= y+"."+m+"."+_date+" "+h+"."+min+"."+s;
+			$(".bottom_time").html( html )
+		}
+	}
 //Nav 国家语言显示
 	function Nav(){
 		this.init = function(){
 			$(".head_middle_country").stop().mouseenter(function(){
 				$("#header_middle_menu").stop().slideDown(500);
 			})
+			$(".head_middle_country").mouseleave(function(){
+				$("#header_middle_menu").stop().slideUp(500)
+			})
+			
+			
 			$(".head_middle_language").stop().mouseenter(function(){
 				$(".head_language_menu").stop().slideDown(500)
 			})
-			$("#header_middle_menu").mouseleave(function(){
-				$("#header_middle_menu").stop().slideUp(500)
+			$(".head_middle_language").mouseleave(function(){
+				var flag = true;
+				if( flag ){
+					$(".head_language_menu").mouseleave(function(){
+						$(".head_language_menu").stop().slideUp(500)
+					})
+				}
 			})
-			$(".head_language_menu").mouseleave(function(){
-				$(".head_language_menu").stop().slideUp(500)
-			})
+			
+			
 			this.NavMiddle()
 		}
 		
@@ -109,4 +140,59 @@ window.onload= function(){
 			}.bind(this))
 		}
 	}
-//
+	
+//shopList  ajax局部刷新
+	function shpLiF(){
+			$("#listNav>ul>a").click(function(){
+				var index = $(this).index();
+				$.ajax({
+				type : "get",
+				url : "json/index.json",
+				success : function(json){
+					var html = "";
+					for( var attr in json["shopList_"+(index+1)].list ){
+						var item = json["shopList_"+(index+1)].list[attr];
+						html += `<ul>
+									<li class="shopBox_li_01">
+										<a href="javascript:;">
+											<img src="images/index/shopList/${item.src1}"/>
+										</a>
+									</li>
+									<li class="shopBox_li_02">
+										<img src="images/index/shopList/${item.src2}"/>
+									</li>
+									<li class="shopBox_li_03">
+										<p><a href="">${item.p1}</a></p>
+										<p><a href="">${item.p2}</a></p>
+									</li>
+									<li class="shopBox_li_04">
+										<p>${item.p3}</p>
+										<p>${item.p4}</p>
+									</li>
+								</ul>`
+					}
+					$("#shopBox").html( html )
+				
+					}
+				})
+			})
+		}
+
+//end_banner 轮播
+	function EndBanner(){
+		this.obj = $(".end_banner").children();
+		this.index = 0;
+		this.timer = null;
+		this.init = function(){
+			this.timer = setInterval( this.autoPlay,2000 );
+		};
+		this.autoPlay = function(){
+			this.index++;
+			if( this.index == 5 ){
+				this.index = 0;
+			}
+			console.log()
+			this.obj.eq(this.index).animate({"opacity":1},1000)
+					.siblings().animate({"opacity":0},1000)
+		}.bind(this);
+	}

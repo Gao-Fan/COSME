@@ -9,7 +9,6 @@ p{word-wrap:break-word}
 header,article,aside,section,footer,nav,figure,main{display:block;}
 
 
-
 /*----------------------------------head--------------------------------------*/
 .headWrap{
 	box-sizing:border-box;
@@ -159,6 +158,7 @@ header,article,aside,section,footer,nav,figure,main{display:block;}
 	display:inline-block;
 	color:#dfc3b8;
 }
+
 /*----------------------------------nav--------------------------------------*/
 .navWrap{
 	box-sizing: border-box;
@@ -264,278 +264,218 @@ header,article,aside,section,footer,nav,figure,main{display:block;}
 	color:#990033;
 }
 
-/*-----------------------------------banner--------------------------------------*/
-.bannerWrap{
+/*-------------------------------------------main--------------------------------------------*/
+#main{
 	width:950px;
-	height:360px;
-	background:white;
-	margin:0 auto;
-}
-.banner{
-	width:910px;
-	height:360px;
-	margin:0 auto;
-	box-shadow:inset 0 0  20px #DFC3B8;
-	overflow:hidden;
-	position:relative;
-}
-.banner ul{
-	position:relative
-}
-.banner ul a{
-	position:absolute;
-	opacity: 0;
-	left:0;
-	top:0;
-}
-.banner ul .banner_show{
-	opacity: 1;
-}
-.banner ol{
-	z-index: 10;	
-	position:absolute;
-	right:20px;
-	bottom:15px;
-}
-.banner ol li{
-	width:25px;
-	height:25px;
-	float:left;
-	margin:0 10px;
-	background:#93846F;
-	z-index: 10;
-	opacity: 0.7;
-	border-radius: 50%;
-}
-.banner ol li.bannerColor{
-	background:orange;	
-}
-/*-----------------------------------sideNav--------------------------------------*/
-.sideNavWrap{
-	height:75px;
-	width:910px;
-	margin:0 auto;
-	box-sizing: border-box;
-	text-align: center;
-	position:relative
-}
-.side_wrap{
-	width:700px;
-	height:100%;
-	overflow: hidden;
-	margin:0 auto;
-}
-.side_wrap ul{
-	height:75px;
-	width:9000px;
-	white-space: nowrap;
-}
-.side_wrap ul li{
-	float:left;
-}
-.side_wrap_left{
-	float:left;
-}
-.side_wrap_right{
-	position:absolute;
-	right:0;
-	top:0
-}
-/*-----------------------------------box--------------------------------------*/
-.box{
-	width:910px;
-	height:340px;
-	margin:0 auto;
-}
-.box div{
-	float:left;
-}
-.box_01 div{
-	float:left;
-}
-.box_01 div a{
-	display:block;
-	width:303px;
-	float:left;
-}
-/*----------------------------------listNav--------------------------------------*/
-#listNav{
-	width:910px;
-	height:51px;
-	margin:0 auto;
-	position:relative
-}
-#listNav ul{
-	width:100%;
-	height:100%;
-	background:rgb(147,132,111)
-}
-#listNav a{
-	display:block;
-	float:left;
-	width:185px;
-	height:51px;
-	background:rgb(147,132,111);
-	box-sizing: border-box;
-}
-#listNav a img{
-	display:inline-block;
-}
-#listNav a li{
-	text-align:center;
-	position:relative;
-	overflow:hidden;
-}
-#listNav a li p:first-child{
-	font-weight: bold;
-	line-height:30px;
-	color:#fff;
-}
-#listNav a li p:nth-child(2){
-	line-height:15px;
-	color:#fff;
-}
-#listNav a:hover{
-	background:rgb(159,146,127);
-}
-.listNav_border{
-	position:absolute;
-	right:0;
-	top:7px;
-}
-#listNav_jiao{
-	position:absolute;
-	top:49px;
-	left:88px;
-}
-/*----------------------------------shopList--------------------------------------*/
-#shopList{
-	width:910px;
 	height:auto;
 	overflow:hidden;
-	margin:0 auto;	
-	box-sizing: border-box;
-	
+	box-sizing:border-box;
+	margin:0 auto;
+	padding:5px;
 }
-#shopBox{
-	margin-top:20px;
-	height:100%;
-	width:100%;
-	
-}
-#shopBox ul{
+.main_left{
+	width:150px;
+	margin: 0 20px;
+	min-height: 1000px;
 	float:left;
-	width:170px;
-	height:307px;
-	box-sizing: border-box;
-	padding:0 5px;
-	margin: 5px 5px;
-	overflow:hidden;
-	box-shadow: inset 0 0 5px  #555555;
 }
-.shopBox_li_01{
-	margin-bottom:5px;
-	text-align:center;
-	overflow:hidden;
+
+.main_left ul li{
+	line-height:26px;
 }
-.shopBox_li_02{
-	margin-bottom:5px;
+.main_left ul li a{
+	color:#93846f;
 }
-.shopBox_li_03{
-	margin-bottom:30px;
-}
-.shopBox_li_03 p:first-child a{
-	font-size:11px;
-	font-weight:bold;
-	line-height:15px;
-	color:#555555;
-}
-.shopBox_li_03 p:nth-child(2) a{
-	font-size:11px;
-	line-height:15px;
-	color:#666666;
-}
-.shopBox_li_02 p:first-child a:hover{
+.main_left ul li a:hover{
 	color:#990033;
 }
-.shopBox_li_04{
-	border-top:1px solid #172C45;
-	padding:10px 5px 0 5px;
+.main_left ul li img{
+	margin:20px 0 10px 0;
 }
-.shopBox_li_02,.shopBox_li_03,.shopBox_li_04{
-	box-sizing: border-box;
-	margin:0 15px;
-}
-/*--------------------------------------btnBanner------------------------------------*/
-#btnBanner{
-	width:910px;
-	height:250px;
-	margin: 40px auto 0;
-}
-.end_banner{
-	height:600px;
-	width:150px;
-	overflow:hidden;
-	position:fixed;
-	right:10px;
-	bottom:0px;
-}
-.end_banner img{
-	position:absolute;
-	top:0;
-	left:0;
-}
-/*--------------------------------------footNav------------------------------------*/
-#footNav{
-	width:950px;
-	height:95px;
-	box-sizing: border-box;
-	padding-top:20px;
-	margin:0 auto;
-}
-.footNav_ul{
-	display:flex;
-	justify-content: space-around;
-}
-.footNav_ul li{
-	flex:1;
-}
-.footNav_ul li p{
-	float:left
-}
-.footNav_ul li img{
-	float:left;
-	margin:0 30px 0 60px;
-}
-.footNav_ul li p{
-	color:#666666;
-	font-size:16px;
-	line-height:50px;
-}
-.footNav_ul li .meijin{
-	font-size:11px;
-	line-height:15px;
-}
-.footNav_ul li:first-child p:last-child{
-	line-height:30px;
-}
-/*------------------------------------logolist-------------------------------------*/
-#LogoList{
-	width:910px;
+/*-----------------------------------------main-right------------------------------*/
+#main_right{
+	width:700px;
 	height:auto;
 	overflow:hidden;
-	text-align:center;
+	border-radius: 10px;
+	padding:15px;
+	/*content_b_bg.gif*/
+	box-shadow:0 0 15px 5px #9F927F;
+	float:right;
+	position:relative;
+	margin:20px 20px 10px 0 ;
+}
+.shrink{
+	width:350px;
+	height:350px;
+}
+.main_rightT{
+	width:100%;
+	height:auto;
 	margin:0 auto;
+	overflow: hidden;
 }
-.LogoList_select{
-	width:260px;
+.main_rightT div{
+	float:left;
 }
-#LogoList p:nth-child(2){
-	line-height:35px;
+.main_rightT div:first-child img:last-child{
+	position:absolute;
+	left:0;
+	top:0;
 }
-#LogoList p img{
-	margin: 0 auto;
+.main_rightT ul{
+	float:left;
 }
+.main_rightT ul li:nth-child(2){
+	margin:15px 0;
+}
+.main_rightT ul li:nth-child(4){
+	margin-top:20px;
+} 
+.main_rightT ul li:nth-child(4) img{
+	float:left;	
+}
+.main_rightM{
+	width:100%;
+}
+.main_rightM div{
+	overflow:hidden;
+}
+.main_rightM div span{
+	float:left;
+	text-align:right;
+}
+
+.main_rightM div span:first-child{
+	width:160px;
+}
+.main_rightM div span:nth-child(2){
+	width:150px;
+}
+.main_rightM div span:nth-child(3){
+	width:100px;
+}
+.main_rightM div span:nth-child(4){
+	width:120px;
+}
+.main_rightM div span:nth-child(5){
+	width:100px;
+}
+.main_rightM ul{
+	overflow:hidden;
+	border-top:1px dashed #333333;
+	border-bottom:1px dashed #333333;
+}
+.main_rightM ul li{
+	float:left;
+}
+.main_rightM ul li:nth-child(1){
+	width:100px;
+}
+.main_rightM ul li:nth-child(2){
+	width:166px;
+}
+.main_rightM ul li:nth-child(3){
+	padding-top:38px;
+	width:100px;
+}
+.main_rightM ul li:nth-child(4){
+	padding-top:38px;
+	width:138px;
+}
+.main_rightM ul li:nth-child(5){
+	padding-top:38px;
+	width:54px;
+}
+.main_rightM ul li:nth-child(6){
+	padding-top:38px;
+	width:107px;
+}
+.main_rightM ul li img{
+	float:left;
+	margin-right:10px;
+}
+.main_rightM ul li h4{
+	line-height:40px;
+	margin-top:10px;
+}
+.main_rightB_1 p:first-child img{
+	padding-top:10px;
+	float:left;
+}
+/*#990033*/
+.set_line_h{
+	line-height:40px;
+	color:#93846f;
+	font-size:13px;
+	font-weight: bold;
+}
+.set_line_h:first-child{
+	color:#990033;
+}
+.set_line_h2{
+	line-height:30px;
+}
+.main_rightB_1 ul{
+	padding-left:40px;
+	
+}
+.main_rightB_1 ul li{
+	line-height:20px;
+	list-style:disc ;
+}
+.main_rightB_1 div{
+	color:#666666;
+	line-height:16px;
+} 
+.main_rightB_2{
+	margin-top:40px;
+}
+.main_rightB_2 ul li{
+	float:left;
+	border:1px solid #333333;
+	margin: 5px 6px;
+}
+.main_rightB_2 ul{
+	overflow:hidden;
+}
+.bottom_border{
+	border-bottom:1px dashed #444444;
+	line-height:80px;
+}
+.setColor{
+	color:#E24714;
+	line-height:25px;
+}
+/*write_a_review_01.gif*/
+.main_rightB_2>img{
+	margin: 30px 0;
+}
+.weiBo{
+	width:210px;
+	height:auto;
+	overflow:hidden;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*------------------------------------footList----------------------------------------*/
 #footList{
 	width:910px;
