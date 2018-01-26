@@ -1,9 +1,10 @@
+<!------------------------------------登录页--------------------------------------------->
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="../css/zhuCe.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/register.css"/>
 		<script src="../js/jquery-1.11.1.min.js"></script>
 	</head>
 	<body>
@@ -13,7 +14,9 @@
 	描述：详情页头部
 -->		
 		<div class="headWrap">
+
 			<div id="head">
+				
 				<div class="head_top">
 					<div id="red_bar_td">
 						<a href="#">
@@ -175,13 +178,14 @@
 				</ul>
 			</div>
 		</div>
+
 <!--
 	作者：offline
 	时间：2018-01-23
 	描述：主体
 -->
 		<div id="main">
-<!--
+			<!--
 	作者：offline
 	时间：2018-01-23
 	描述：主体左侧
@@ -248,173 +252,44 @@
 	时间：2018-01-25
 	描述：main_right
 -->
-		<div class="main_right">
-			<div class="main_right_banner">
-				<img src="../images/zhuCe/glo_gb_pagebanner.jpg" alt="" />
-			</div>
-			<form action="register.html" id="formBox">
-				<img src="../images/zhuCe/new_register.gif" alt="" />
-				<div><a href="#" class="float_right">已经成为会员？ 请登入</a></div>
-				<h4>第 1 步 (共 2 个步骤)：</h4>
-				<dl id="formEnter">
-					<!--动态添加内容-->
-				</dl>
-				<fieldset>
-					<legend>个人资料</legend>
-					<div>
-						<label for="">称谓及姓名</label>
-						<select name="" id="userNamed">
-							<option value="">--</option>
-							<option value="">小姐</option>
-							<option value="">女士</option>
-							<option value="">太太</option>
-							<option value="">先生</option>
-						</select>
-						<input type="text" id="userName" placeholder="請輸入姓名"/>
-					</div>
-					<div>
-						<label for="" >所在地</label>
-						<select name="" class="adress" id="userAddress">
-							<option value="">-- 请选择 --</option>
-							<option value="">-- 天王 --</option>
-							<option value="">-- 盖 --</option>
-							<option value="">-- 地虎 --</option>
-							<option value="">-- 宝塔 --</option>
-							<option value="">-- 镇 --</option>
-							<option value="">-- 河妖 --</option>
-						</select>
-					</div>
-				</fieldset>
-				<fieldset>
-					<legend>账户登录信息</legend>
-					<div>
-						<label for="">电邮地址</label>
-						<input type="text" placeholder="請輸入電郵地址" id="userEmile"/>
-					</div>
-					
-					<div>
-						<label for="">再次输入电邮地址</label>
-						<input type="text" placeholder="請再次輸入電郵地址" id="QuserEmile"/>
-					</div>
-					
-					<div>
-						<label for="">建立密码</label>
-						<input type="password" placeholder="請輸入密碼" id="userPwd"/>
-					</div>
-					
-					<div>
-						<label for="">再次输入密码	</label>
-						<input type="password" placeholder="請再次輸入密碼" id="QuserPwd"/>
-					</div>
-				</fieldset>	
-				<ul>
-					<li>密码须由 6 - 12 个英文及数字组成 (如：abc123)，不能单独使用英文字母或数字作为密码。英文字母区分大小写。</li>
-					<li>请勿使用 Comcast 的邮箱，因为这些邮箱无法收到本站发出的电邮。</li>
-					<li>我们会发出一封核证电邮到你注册的电邮地址。届时请按下电邮内的帐户激活链接即可完成注册程序。为确保你收到有关的电邮，请将 service@cosme-de.com 和 updates@cosme-de.com 加入你的电邮通讯簿。</li>
-					<li>请使用Google Chrome，Safari或Firefox浏览我们的网站以获得最佳浏览体验，并享用全部功能。我们并不支援Internet Explorer，某些功能可能无法正常使用。</li>
-				</ul>
-				<fieldset class="likeBrand">
-					<legend>我喜爱的护肤品牌</legend>
-					<div>
-						<select name="">
-							<option value="">第一最爱</option>
-							<option value=""></option>
-							<option value=""></option>
-						</select>
-					</div>	
-					<div>
-						<select name="">
-							<option value="">第二最爱</option>
-							<option value=""></option>
-							<option value=""></option>
-						</select>
-					</div>					
-					<div>
-						<select name="">
-							<option value="">第三最爱</option>
-							<option value=""></option>
-							<option value=""></option>
-						</select>
-					</div>
-					<div>
-						<select name="">
-							<option value="">其他喜爱</option>
-							<option value=""></option>
-							<option value=""></option>
-						</select>
-					</div>
-				</fieldset>	
-				<fieldset class="likeBrand">
-					<legend>我的肤质</legend>
-					<div>
-						<select name="">
-							<option value="">--请选择--</option>
-							<option value=""></option>
-							<option value=""></option>
-						</select>
-					</div>
-				</fieldset>	
-				<fieldset class="radio_change">
-					<legend>订阅电子通讯</legend>
-					<input type="checkbox" name="" id="" value="" />
-					<span>我希望率先知道 COSME-DE.COM 的最新优惠及新货品上市讯息。</span>
-				</fieldset>
-				<fieldset class="radio_change">
-					<legend>使用条款</legend>
-					<input type="checkbox" name="" id="provision" value="" />
-					<span>我已仔细阅读并同意有关 COSME-DE.COM 的使用条款：</span>
-				</fieldset>
-				<textarea name="" rows="" cols="">
-欢迎阁下使用 COSME-DE.COM﹝「本网站」﹞或注册成为本网站的会员，本网站根据以下使用条款﹝「本条款」﹞向阁下提供服务。这些条款限定了本网站的法律责任，并就阁下对本网站的使用设定了限制。请阁下细阅。
-本条款之最新修订日期为二零一五年十一月二十五日
-
-使用条款
-
-同意接受条款
-
-当阁下使用 COSME-DE.COM﹝本网站﹞或注册成为本网站会员的同时，阁下将会被视作接受本条款之所有条件及规则所规管；所有该等条件及规则﹝包括但不限于 COSME-DE.COM 的私隐政策﹞于此经提述均被包涵在本条款内。本条款适用于 COSME-DE.COM 域名下的所有网页﹝包括但不限于其子域名的所有网页﹞。COSME-DE.COM 亦可能提供其他受不同或附加服务条款限制的服务。所以阁下于使用本网站前请先仔细阅读有关条款。
-
-COSME-DE.COM 有权在任何时间及不需事先通知下而修改／取消／增加／替代任何在此列明的条款，而该条款均对本网站的使用者及注册会员有效力及约束力。藉因阁下每次使用本网站及/或其任何部份，阁下即同意及/或被视作已同意全部关于本条款及条件及被那些由 COSME-DE.COM 随时发出及采用之条款及条件所约束。因此，阁下应定期浏览本页。如在本条款作出修订后仍继续使用本网站，即被视为接受该些修订。
-
-使用本网站
-
-本网站将所收集有的全部个人资料予以保密，在未得到阁下同意前，不会透露、出售、交易或租用阁下的个人资料予他人或非附属本公司的第三方单位作其市场推广之用。然而本网站可在有需要披露此等资料以达到收集此等资料之目的，或直接与其有关之目的时，向下述人士披露资料：
-
-根据适用法例之下，或回应法庭传令时，本网站会向有关的第三方单位披露所收集得的个人资料﹝包括可识别个人身份的资料﹞。
-根据本网站使用条款需要，本网站有权向提供行政支援、订单处理、网上付款结算、信用参考、维护及防止本网站被不正确使用或其他对本网站营运提供服务的代理人、承办商或服务提供者披露本网站收集的个人资料，或当本网站回应法庭传令或法律程序所需对该人士披露该资料的责任。
-本网站若干服务或客户意见调查需由合作伙伴（如代理公司、提供相关技术服务的公司、运输公司、邮寄公司、提供奖品的公司等）提供或共同提供。爲了向阁下提供此等服务或意见调查，本网站必需与该合作伙伴分享阁下的个人资料。他们有机会获得履行职责所需的个人信息，但不得用于其他用途。
-个别情况下，本网站会共享部份不可识别个人身份的资料予第三方作审计记录本网站点击率或探访量。
-产品数据免责声明
-
-COSME-DE.COM 从世界各地信誉良好的生产商、批发商搜罗优质的护肤品、化妆品及香水商品。唯使用这些护肤品、化妆品及香水商品／健康及美容商品﹝「商品」﹞有一定的使用方法及指引，阁下亦需留意个别商品可能于个别人士身上产生不同的反应或影响，包括但不限于可能引到皮肤或身体的敏感反应。
-
-所有于本网站展示及提供的商品数据﹝不论是展示于本网站的商品说明网页、编辑部落格或其他合作的网站﹞仅供阁下作为参考之用，本网站展示及提供的一切商品数据亦为根据该商品生产商的资料提供。
-
-本网站概不保证阁下通过本网站购买或获取的任何商品信息或其他数据均达到阁下的预期，且准确可靠。本网站概不会对商品的某特定用途之效用性、质量及可靠性作出任何保证及负上任何责任。
-
-本网站可随时更新已列明的商品价格及存库数据而无需事先通知阁下。
-
-				</textarea>
-				<fieldset class="imgYz">
-					<legend>图像验证</legend>
-					<ul>
-						<li>
-							<img src="" alt="" />
-						</li>
-						<li>
-							<input type="text" />
-						</li>
-						<li>
-							<p>( 请根据大小写输入。 )</p>
-						</li>
-					</ul>
-				</fieldset>
-				<input type="submit" id="subMit"/>
-			</form>
-		</div>		
+			<div class="main_right clear">
+				<div>
+					<img src="../images/register/member_login.gif" alt=""/>
+				</div>
+				<div>
+					<span>登入</span>
+					<input type="text" placeholder="请输入电邮地址" id="useEmile"/>
+				</div>
+				<div id="enterEM1">
+					<em>111</em>
+				</div>
+				<div>
+					<span>密码</span>
+					<input type="text" placeholder="请输入密码" id="usePwd"/>
+				</div>
+				<div id="enterEM2">
+					<em>222</em>
+				</div>
+				<div class="enterBtn">
+					<img src="../images/register/login_now_01.gif" alt="" id="enBtn"/>
+					<a href="">忘记密码?</a>
+					<a href="">登记成为 COSME-DE.COM 会员</a>
+				</div>
+				<div>
+					<img src="../images/register/partner_sites_login.gif" alt="" />
+				</div>
+				<div>
+					<a href="" class="PayPal">
+						以PayPal登录
+					</a>
+					<a href="" class="Alipay">
+						<img src="../images/register/alipay-sq.png" alt="" />
+						<span>以Alipay登录</span>
+					</a>
+				</div>
+			</div>	
+		
 		</div>
-
-
 
 
 <!--
@@ -529,4 +404,4 @@ COSME-DE.COM 从世界各地信誉良好的生产商、批发商搜罗优质的�
 		</div>
 	</body>
 </html>
-<script src="../js/zhuCe.js"></script>
+<script src="../js/register.js"></script>
