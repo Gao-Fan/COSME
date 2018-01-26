@@ -1,13 +1,96 @@
 window.onload= function(){
-	new Nav().init();        //Nav 国家语言显示
-	new BodyTop().init();    //最上端置顶
-	new LunBo().init();       //轮播图
-	new PaiList().init();    //sideNav
-	new shpLiF().init();             //选项卡,请求ajax
-	new EndBanner().init();    //右下角广告
-	new GetName().init();	   //左下角时间
-	new CarBoard().init();     //head购物篮广告
+	new Nav().init();           //Nav 国家语言显示
+	new BodyTop().init();       //最上端置顶
+	new PaiList().init();       //sideNav
+	new EndBanner().init();     //右下角广告
+	new GetName().init();	    //左下角时间
+	new CarBoard().init();      //head购物篮广告
+	new ShowUl();               //main点击左侧按钮出现子元素ul
+	new Verify().init()         //表单验证
 }
+//表单验证
+	function Verify(){
+//		* 请在标示的项目输入正确资料：
+//		称谓及姓名 - 请输入此项资料
+//		所在地 - 请选择你的所在地
+//		电邮地址 - 请输入此项资料
+//		建立密码 - 密码须由 6-12 个英文及数字组成，大小写有别。
+//		使用条款 - 请在方格内打勾表示接受有关的条款。
+//		图像核证 - 请按图像显示输入字符
+		this.init = function(){
+			this.flagName = true;
+			this.flagAddress = true;
+			this.flagEmile = true;
+			this.flagPwd = true;
+			this.flagQpwd = true;
+			this.flagProvision = true;
+			$("#formBox").submit(function(){
+					return false;
+			})
+			
+			$("#subMit").click(function(){
+				$("#formEnter").find("dd").remove();
+				
+				if( $("#userNamed").val()=="--" || $("#userNamed").val()=="" ){
+					$("<dd>").html("称谓及姓名 - 请输入此项资料").appendTo( "#formEnter" )
+					this.flagName = false;
+				}else{
+					this.flagName = true;
+				}
+				
+				if( $("#userAddress").val()=="--请选择--" ){
+					$("<dd>").html("所在地 - 请选择你的所在地").appendTo( "#formEnter" )
+					this.flagAddress = false;
+				}else{
+					this.flagAddress = true;
+				}
+				
+				var regEmlie = /^\w{8,}@\.\w{2,}$/
+				if( regEmlie.test( $("#userEmile").val() ) ){
+					this.flagEmile = true;
+				}else if( $("#userEmile").val() != $("#QuserEmile").val()){
+					$("<dd>").html("电邮地址 - 请输入此项资料").appendTo( "#formEnter" )
+					this.flagEmile = false;
+				}
+				else{
+					$("<dd>").html("电邮地址 - 请输入此项资料").appendTo( "#formEnter" )
+					this.flagEmile = false;
+				}
+				
+				var redPwd = /^.{6,}$/
+				if( redPwd.test( $("#userPwd").val() ) ){
+					this.flagPwd = true;
+				}else{
+					$("<dd>").html("密码须由 6-12 个英文及数字组成，大小写有别").appendTo( "#formEnter" )
+					this.flagPwd = false;
+				}
+				//确认密码
+				if( $("#userPwd").val() == $("#QuserPwd").val() ){
+					this.flagQpwd = true;
+				}else{
+					$("<dd>").html("两次密码输入不一致").appendTo( "#formEnter" )
+					this.flagQpwd = false;
+				}
+				//使用条款 - 请在方格内打勾表示接受有关的条款。
+				if( $("#provision").is(":checked")){
+					this.flagProvision = true;
+				}else{
+					this.flagProvision = false;
+					$("<dd>").html("使用条款 - 请在方格内打勾表示接受有关的条款。").appendTo( "#formEnter" )
+				}
+			}.bind(this))
+		}
+	}
+//点击左侧按钮出现子元素ul
+	function ShowUl(){
+		$("li").click(function(){
+		 	if( $(this).find("ul").css("display") == "block" ){
+		 		$(this).find("ul").hide(600);
+		 	}else{
+		 		$(this).find("ul").show(600);
+		 	}
+		})
+	}
 //购物城广告滚动
 	function CarBoard(){
 		this.body = $("#carList ul");
@@ -34,12 +117,12 @@ window.onload= function(){
 			var m = d.getMonth()+1;
 			var h = d.getHours();
 			var min = d.getMinutes();
-			var s = d.getSeconds()
-			var _date = toTwo(d.getDate())
-			var html = ""
+			var s = d.getSeconds();
+			var _date = d.getDate();
+			var html = "";
 			var arr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
 			html= y+"."+m+"."+_date+" "+h+"."+min+"."+s;
-			$(".bottom_time").html( html )
+			$(".bottom_time").html( html );
 		}
 	}
 //Nav 国家语言显示
@@ -97,37 +180,7 @@ window.onload= function(){
 			})
 		}
 	}
-//轮播图
-	function LunBo(){
-		this.index = 0 ;
-		this.timer = null;
-		this.init = function(){
-			this.timer = setInterval( this.autoPlay,2000 );
-			this.enter();
-		}
-		this.autoPlay = function(){
-			this.index++;
-			$(".banner ol li").removeClass("bannerColor")
-			if( this.index == 4 ){
-				this.index = 0;
-			}
-			$(".banner ol li").stop().eq(this.index).addClass("bannerColor")
-			$(".banner ul a").stop().eq(this.index).animate({"opacity":1},1000)
-							 .siblings().animate({"opacity":0},1000)
-		}.bind(this);
-		this.enter = function(){
-			var that = this;
-			$(".banner ol li").mouseenter(function(){
-				var sum = $(this).index()-1;
-				that.index = sum;
-				that.autoPlay();
-				clearInterval(that.timer);
-			})
-			$(".banner ol li").mouseleave(function(){
-				that.timer = setInterval( that.autoPlay,2000 )
-			})
-		}
-	}
+
 //图标切换 sideNav
 	function PaiList(){
 		this.speed = 300;
@@ -156,58 +209,6 @@ window.onload= function(){
 			}.bind(this))
 		}
 	}
-	
-//shopList  ajax局部刷新
-	function shpLiF(){
-		
-		this.Ajaxget = function( index ){
-			var index = index
-			$.ajax({
-			type : "get",
-			url : "json/index.json",
-			success : function(json){
-				var html = "";
-				for( var attr in json["shopList_"+(index+1)].list ){
-					var item = json["shopList_"+(index+1)].list[attr];
-					html += `<ul>
-								<li class="shopBox_li_01">
-									<a href="html/details.html?fL=${"shopList_"+(index+1)}&id=${item.id}">
-										<img src="images/index/shopList/${item.src1}"/>
-									</a>
-								</li>
-								<li class="shopBox_li_02">
-									<img src="images/index/shopList/${item.src2}"/>
-								</li>
-								<li class="shopBox_li_03">
-									<p><a href="">${item.p1}</a></p>
-									<p><a href="">${item.p2}</a></p>
-								</li>
-								<li class="shopBox_li_04">
-									<p>${item.p3}</p>
-									<p>${item.p4}</p>
-								</li>
-							</ul>`
-				}
-				$("#shopBox").html( html )
-			
-				}
-			})
-			
-		}
-		this.init = function(){
-			var that = this;
-			$("#listNav>ul>a").click(function(){
-				var index = $(this).index();
-				that.Ajaxget( index );
-			})
-		}
-		var flag = true;
-		if( flag ){
-			this.Ajaxget( 0 );
-			flag = false;
-		}
-	}
-
 //end_banner 轮播
 	function EndBanner(){
 		this.obj = $(".end_banner").children();

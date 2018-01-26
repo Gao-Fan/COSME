@@ -155,8 +155,21 @@ header,article,aside,section,footer,nav,figure,main{display:block;}
 	float: right;
 	margin-top:2px;
 }
-#head_myshopcar ul li:last-child a{
-	display:inline-block;
+#head_myshopcar ul li{
+	overflow:hidden;
+}
+
+#carList{
+	margin-top:2px;
+	height:20px;
+	position:relative;
+}
+#carList ul{
+	position:absolute;
+	top:-8px;
+}
+#carList ul li p{
+	line-height:20px;
 	color:#dfc3b8;
 }
 /*----------------------------------nav--------------------------------------*/
@@ -570,7 +583,6 @@ header,article,aside,section,footer,nav,figure,main{display:block;}
 .right{
 	float:right;
 }
-
 /*------------------------------------footSide----------------------------------------*/
 .foot_side{
 	width:910px;
