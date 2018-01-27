@@ -5,46 +5,51 @@ window.onload= function(){
 	new EndBanner().init();     //右下角广告
 	new GetName().init();	    //左下角时间
 	new CarBoard().init();      //head购物篮广告
-	new SetDetails().init();    //请求ajax设置主题内容
-	new AddShop().init()        //将商品添加到cookie
+	new ShowUl();               //main点击左侧按钮出现子元素ul
+	new enterToggle().init()    //登录注册切换
+	new shopCar().init();       //结算商品加载
 }
-//加入购物车
-	function AddShop(){
+//购物车数据加载
+	function shopCar(){
 		this.init = function(){
-			this.add();
-		};
-		this.add = function(){
-			var that = this;
-			$("#addShop").click(function(){
-				var arr = [];
-				var flag = true;
-				var json = {
-					"src" : $(this).data("src"),
-					"id" : $(this).data("id"),
-					"name" : $(this).data("name"),
-					"price" : $(this).data("price"),
-					"list" : $(this).data("list"),
-					"count" : $('#Num option:selected').text()
-				}
-				var oldArr = that.getCookie("shop") 
-				console.log( oldArr )
-				if( oldArr ){
-					arr = oldArr;
-					for( var i = 0 ; i < arr.length ; i++ ){
-						if( arr[i].id == json.id && arr[i].name == json.name ){
-							arr[i].count = parseInt( json.count ) + parseInt( arr[i].count )
-							flag = false;
-						}
+			this.obj();
+			this.removeShop();
+		}
+		this.obj = function(){
+			var arr = this.getCookie("shop");
+			var html = "";
+			var sum = 0;
+			for( var i = 0 ; i < arr.length ; i++ ){
+				html = `
+					<tr data-id="${arr[i].id}" data-name="${arr[i].name}">
+						<td><img class="fl" src="../images/index/shopList/${arr[i].src}" alt="" /></td>
+						<td>${arr[i].name}</td>
+						<td>${arr[i].price}</td>
+						<td>${arr[i].count}</td>
+						<td> ${ Number( arr[i].count ) * Number( arr[i].price ) } </td>
+						<td><button>删除</button></td>
+					</tr>
+				`
+				sum += Number(arr[i].count)*Number(arr[i].price)
+				$(html).prependTo( "#account" );
+				$(".sumMoney").html(sum)
+			}
+		}
+		this.removeShop = function(){
+			var that = this
+			$(".tab").on("click","button",function(){
+				$(this).parent().parent().remove();
+				var pid = $(this).parent().parent().data("id");
+				var pname = $(this).parent().parent().data("name");
+				var arr = that.getCookie("shop");
+				for( var i = 0 ; i < arr.length ; i++ ){
+					if( arr[i].id == pid && arr[i].name == pname ){
+						arr.splice( i ,1 );
 					}
 				}
-				if( flag ){
-				console.log( json )
-					arr.push( json )
-				}
-				document.cookie = "shop="+( JSON.stringify( arr ) );
-				console.log( document.cookie )
+				document.cookie = "shop="+JSON.stringify( arr )
 			})
-		};
+		}
 		this.getCookie = function(key){
 			cookie_info = document.cookie;
 			if (cookie_info) {
@@ -53,48 +58,43 @@ window.onload= function(){
 					item = list[i].split('=');
 					if (item[0] == key) {
 						oldCookie = item[1];
-						return JSON.parse(oldCookie); //返回一个 数组
+						return JSON.parse(oldCookie);
 					}
 				}
-				return [];//如果cookie中 没有想要的 键值   也返回一个空数组		
+				return [];
 			}
-			return [];// 如果cookie中没有值，返回一个空数组
+			return [];
 		}
 	}
-	
-//请求ajax设置主题内容
-	function SetDetails(){
+//登录注册切换
+	function enterToggle(){
 		this.init = function(){
-			this.getItem();
-		}
-		this.getItem = function(){
-			var str = location.href;
-			str = str.split("?")[1];
-			var arr = str.split("&");
-			var fL = arr[0].split("=")[1];
-			var id = arr[1].split("=")[1];
-			var that = this;
-			$.ajax({
-				url : "../json/index.json",
-				type : "get" ,
-				success : function(json){
-					for( var i = 0 ; i < json[fL].list.length ; i++ ){
-						var item = json[fL].list[i];
-						if( item.id == id ){
-							$("#addShop").attr({"data-src":item.src1, "data-id":item.id, "data-list":fL, "data-name":item.name,"data-price":item.price})
-							that.setMain( item )
-						}
-					}
-				}
-			})
-		}
-		this.setMain = function( obj ){
-			$("#img001").attr("src","../images/index/shopList/"+obj.src1)
-			$("#img002").attr("src","../images/index/shopList/"+obj.src1)
-						.css({"width":100,"height":100})
-			$("#text001").html(obj.name);
-			$("#text002").html(obj.name);
-		}
+			this.Event();
+		};
+		this.Event = function(){
+			$("#Enter_dengLu").click(function(){
+				$(".main").css("display","block");
+				$("#Enter_dengLu").removeClass("modle");
+				$("#Enter_zhuCe").addClass("modle")
+				$(".main_2").css("display","none")
+			});
+			$("#Enter_zhuCe").click(function(){
+				$(".main_2").css("display","block")
+				$("#Enter_dengLu").addClass("modle");
+				$("#Enter_zhuCe").removeClass("modle")
+				$(".main").css("display","none")
+			});
+		};
+	}
+//点击左侧按钮出现子元素ul
+	function ShowUl(){
+		$("li").click(function(){
+		 	if( $(this).find("ul").css("display") == "block" ){
+		 		$(this).find("ul").hide(600);
+		 	}else{
+		 		$(this).find("ul").show(600);
+		 	}
+		})
 	}
 //购物城广告滚动
 	function CarBoard(){

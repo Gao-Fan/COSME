@@ -8,6 +8,31 @@ window.onload= function(){
 	new GetName().init();	   //左下角时间
 	new CarBoard().init();     //head购物篮广告
 }
+//判断是否登录成功
+//	function EnterUser(){
+//		this.init = function(){
+//			if( this.getCookie("enterOk") ){
+//				alert("找到了")
+//			}else{
+//				alert("没找到")
+//			}
+//		}
+//		this.getCookie = function(key){
+//			cookie_info = document.cookie;
+//			if (cookie_info) {
+//				list = cookie_info.replace(/;\s/g,";").split(';');
+//				for (var i=0;i<list.length;i++) {
+//					item = list[i].split('=');
+//					if (item[0] == key) {
+//						oldCookie = item[1];
+//						return JSON.parse(oldCookie); 
+//					}
+//				}
+//				return [];
+//			}
+//			return [];
+//		}
+//	}
 //购物城广告滚动
 	function CarBoard(){
 		this.body = $("#carList ul");
