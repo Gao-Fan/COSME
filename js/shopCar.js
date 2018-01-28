@@ -8,7 +8,16 @@ window.onload= function(){
 	new ShowUl();               //main点击左侧按钮出现子元素ul
 	new enterToggle().init()    //登录注册切换
 	new shopCar().init();       //结算商品加载
+	new JunpHtml();             //页面跳转
 }
+//跳转
+	function JunpHtml(){
+		$("#head_myshopcar,#junpCar").click(function(){
+			location.href = "shopCar.html"
+		}).mouseenter(function(){
+			$(this).css("cursor","pointer")
+		});
+	}
 //购物车数据加载
 	function shopCar(){
 		this.init = function(){
@@ -47,7 +56,7 @@ window.onload= function(){
 						arr.splice( i ,1 );
 					}
 				}
-				document.cookie = "shop="+JSON.stringify( arr )
+				document.cookie = "shop="+JSON.stringify( arr );
 			})
 		}
 		this.getCookie = function(key){
@@ -139,8 +148,6 @@ window.onload= function(){
 			$(".head_middle_country").mouseleave(function(){
 				$("#header_middle_menu").stop().slideUp(500)
 			})
-			
-			
 			$(".head_middle_language").stop().mouseenter(function(){
 				$(".head_language_menu").stop().slideDown(500)
 			})
@@ -152,11 +159,8 @@ window.onload= function(){
 					})
 				}
 			})
-			
-			
 			this.NavMiddle()
 		}
-		
 		this.NavMiddle = function(){
 			$(".nav_middle_01").focus(function(){
 				$(this).attr("value","");
@@ -200,7 +204,6 @@ window.onload= function(){
 					$(".side_wrap ul").stop().animate({"left": spL - this.speed },1000)
 				}
 			}.bind(this))
-			
 			$(".side_wrap_right").click(function(){
 				$(".side_wrap ul").css("position","relative");
 				var spL = parseInt($(".side_wrap ul").css("left"))

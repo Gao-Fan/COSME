@@ -311,6 +311,22 @@ header,article,aside,section,footer,nav,figure,main{display:block;}
 	box-shadow: 0 0 10px 10px #AAAAAA;
 	border-radius: 10px;
 }
+.main_right img:nth-child(1){
+	float: left;
+}
+.show_speed{
+	float: right;
+	line-height:40px;
+	box-sizing:border-box;
+	padding:20px 40px 0 0 ;
+}
+.show_speed>p>em{
+	margin: 0 10px;
+}
+.show_speed>p>em:nth-of-type(1){
+	color: #A80057;
+	font-weight:bold;
+}
 .bulletin{
 	margin: 0 24px;
 	background:rgb(255, 226, 133);
@@ -338,8 +354,9 @@ header,article,aside,section,footer,nav,figure,main{display:block;}
 }
 .enter{
 	width:508px;
-	margin-left: 30px;
+	margin: 0 auto;
 	background:#EEEEEE;
+	
 }
 .toggle>div{
 	float:left;

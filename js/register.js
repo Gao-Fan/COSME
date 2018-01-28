@@ -7,7 +7,16 @@ window.onload= function(){
 	new CarBoard().init();      //head购物篮广告
 	new ShowUl();               //main点击左侧按钮出现子元素ul
 	new register().init();      //登陆验证
+	new JunpHtml();             //页面跳转
 }
+//跳转
+	function JunpHtml(){
+		$("#head_myshopcar,#junpCar").click(function(){
+			location.href = "shopCar.html"
+		}).mouseenter(function(){
+			$(this).css("cursor","pointer")
+		});
+	}
 //登录验证
 	function register(){
 		this.init = function(){
@@ -126,11 +135,8 @@ window.onload= function(){
 					})
 				}
 			})
-			
-			
 			this.NavMiddle()
 		}
-		
 		this.NavMiddle = function(){
 			$(".nav_middle_01").focus(function(){
 				$(this).attr("value","");
@@ -140,7 +146,6 @@ window.onload= function(){
 				}
 			})
 		}
-		
 	}
 //最上端置顶
 	function BodyTop(){
@@ -159,7 +164,6 @@ window.onload= function(){
 			})
 		}
 	}
-
 //图标切换 sideNav
 	function PaiList(){
 		this.speed = 300;
@@ -174,7 +178,6 @@ window.onload= function(){
 					$(".side_wrap ul").stop().animate({"left": spL - this.speed },1000)
 				}
 			}.bind(this))
-			
 			$(".side_wrap_right").click(function(){
 				$(".side_wrap ul").css("position","relative");
 				var spL = parseInt($(".side_wrap ul").css("left"))

@@ -7,7 +7,17 @@ window.onload= function(){
 	new CarBoard().init();      //head购物篮广告
 	new SetDetails().init();    //请求ajax设置主题内容
 	new AddShop().init()        //将商品添加到cookie
+	new JunpHtml()              //页面跳转
 }
+
+//跳转
+	function JunpHtml(){
+		$("#head_myshopcar,#junpCar").click(function(){
+			location.href = "shopCar.html"
+		}).mouseenter(function(){
+			$(this).css("cursor","pointer")
+		});
+	}
 //加入购物车
 	function AddShop(){
 		this.init = function(){
@@ -18,6 +28,7 @@ window.onload= function(){
 			$("#addShop").click(function(){
 				var arr = [];
 				var flag = true;
+				var sum = 0;
 				var json = {
 					"src" : $(this).data("src"),
 					"id" : $(this).data("id"),
@@ -27,22 +38,25 @@ window.onload= function(){
 					"count" : $('#Num option:selected').text()
 				}
 				var oldArr = that.getCookie("shop") 
-				console.log( oldArr )
 				if( oldArr ){
 					arr = oldArr;
 					for( var i = 0 ; i < arr.length ; i++ ){
 						if( arr[i].id == json.id && arr[i].name == json.name ){
 							arr[i].count = parseInt( json.count ) + parseInt( arr[i].count )
+							sum += arr[i].count
 							flag = false;
 						}
 					}
 				}
 				if( flag ){
-				console.log( json )
 					arr.push( json )
+					console.log( json.count )
+					sum += json.count
 				}
+				$("#junpCar p").eq(0).find("span").html("")
+				$("#junpCar p").eq(0).find("span").html( sum )
 				document.cookie = "shop="+( JSON.stringify( arr ) );
-				console.log( document.cookie )
+				document.cookie = "sum="+sum
 			})
 		};
 		this.getCookie = function(key){

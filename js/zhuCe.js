@@ -7,7 +7,39 @@ window.onload= function(){
 	new CarBoard().init();      //head购物篮广告
 	new ShowUl();               //main点击左侧按钮出现子元素ul
 	new Verify().init()         //表单验证
+	new JunpHtml();             //页面跳转
+	new shopNum().init()        //购物车里有多少东西
 }
+//判断购物车里有多少东西
+	function shopNum(){
+		this.init = function(){
+			var arr = this.getCookie("sum")
+			$("#junpCar p").eq(0).find("span").html( arr )
+		}
+		this.getCookie = function(key){
+			cookie_info = document.cookie;
+			if (cookie_info) {
+				list = cookie_info.replace(/;\s/g,";").split(';');
+				for (var i=0;i<list.length;i++) {
+					item = list[i].split('=');
+					if (item[0] == key) {
+						oldCookie = item[1];
+						return JSON.parse(oldCookie);
+					}
+				}
+				return [];
+			}
+			return [];
+		}
+	}
+//跳转
+	function JunpHtml(){
+		$("#head_myshopcar,#junpCar").click(function(){
+			location.href = "shopCar.html"
+		}).mouseenter(function(){
+			$(this).css("cursor","pointer")
+		});
+	}
 //表单验证
 	function Verify(){
 //		* 请在标示的项目输入正确资料：

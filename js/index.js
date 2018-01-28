@@ -1,13 +1,47 @@
 window.onload= function(){
-	new Nav().init();        //Nav 国家语言显示
-	new BodyTop().init();    //最上端置顶
-	new LunBo().init();       //轮播图
-	new PaiList().init();    //sideNav
-	new shpLiF().init();             //选项卡,请求ajax
-	new EndBanner().init();    //右下角广告
-	new GetName().init();	   //左下角时间
-	new CarBoard().init();     //head购物篮广告
+	new Nav().init();           //Nav 国家语言显示
+	new BodyTop().init();       //最上端置顶
+	new LunBo().init();         //轮播图
+	new PaiList().init();       //sideNav
+	new shpLiF().init();        //选项卡,请求ajax
+	new EndBanner().init();     //右下角广告
+	new GetName().init();	    //左下角时间
+	new CarBoard().init();      //head购物篮广告
+	new JunpHtml()              //页面跳转
+	new shopNum().init()        //判断购物车有多少东西
 }
+//判断购物车里有多少东西
+	function shopNum(){
+		this.init = function(){
+			var arr = this.getCookie("sum")
+//			alert( arr )
+			$("#junpCar p").eq(0).find("span").html( arr )
+		}
+		
+		this.getCookie = function(key){
+			cookie_info = document.cookie;
+			if (cookie_info) {
+				list = cookie_info.replace(/;\s/g,";").split(';');
+				for (var i=0;i<list.length;i++) {
+					item = list[i].split('=');
+					if (item[0] == key) {
+						oldCookie = item[1];
+						return JSON.parse(oldCookie);
+					}
+				}
+				return [];
+			}
+			return [];
+		}
+	}
+//跳转
+	function JunpHtml(){
+		$("#head_myshopcar,#junpCar").click(function(){
+			location.href = "html/shopCar.html"
+		}).mouseenter(function(){
+			$(this).css("cursor","pointer")
+		});
+	}
 //判断是否登录成功
 //	function EnterUser(){
 //		this.init = function(){
