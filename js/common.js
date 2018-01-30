@@ -1,131 +1,151 @@
-
-//获得区间内随机数
-function rand(min,max){
-	return Math.round(Math.random()*(max-min)+min);
+window.onload= function(){
+	new Nav().init();           //Nav 国家语言显示
+	new BodyTop().init();       //最上端置顶
+	new CarBoard().init();      //head购物篮广告
+	new JunpHtml()              //页面跳转
+	new shopNum().init()        //判断购物车有多少东西
+	new EndBanner().init();     //右下角广告
+	new GetTime().init();	    //左下角时间
+	new ShowUl();               //main点击左侧按钮出现子元素ul
 }
-
-//获得随机颜色
-function getColor(){
-	var str = "0123456789abcedf"
-	var strCol = "#"
-	for(var i = 0 ; i < 6 ; i++ ){
-		strCol += str.charAt(rand(0,15));
+//点击左侧按钮出现子元素ul
+	function ShowUl(){
+		$("li").click(function(){
+		 	if( $(this).find("ul").css("display") == "block" ){
+		 		$(this).find("ul").hide(600);
+		 	}else{
+		 		$(this).find("ul").show(600);
+		 	}
+		})
 	}
-	return strCol
-}
-
-//根据id查找页面元素
-function $id(id){
-	return document.getElementById(id);
-}
-
-//现在的时间日期
-function showTime(){
-	var d = new Date();
-	var y = d.getFullYear();
-	var m = toTwo(d.getMonth()+1)
-	var _date = toTwo(d.getDate())
-	
-	var arr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
-	
-	return ( y+"年"+m+"月"+_date+"日"+" "+arr[d.getDay()]);
-}
-function toTwo(val){
-	return val<10? "0"+val : val ;
-}
-//计算差多少秒
-function diff(st,en){
-	return Math.abs(st.getTime() - en.getTime()) / 1000;
-}
-//碰撞
-function pz(obj1,obj2){
-	var L1 = obj1.offsetLeft;
-	var R1 = obj1.offsetLeft + obj1.offsetWidth;		
-	var T1 = obj1.offsetTop;
-	var B1 = obj1.offsetTop + obj1.offsetHeight;
-				
-	var L2 = obj2.offsetLeft;
-	var R2 = obj2.offsetLeft + obj2.offsetWidth;		
-	var T2 = obj2.offsetTop;
-	var B2 = obj2.offsetTop + obj2.offsetHeight; 
-				
-	if( R1 < L2 || L1 > R2 || B1 < T2 || T1 > B2 ){
-		return false;
-	}else{
-		return true;
-	}
-}	
-
-//完美运动
-function startMove(obj,json,callback){
-	clearInterval(obj.timer);
-	obj.timer = setInterval(function(){
-		var flag = true;                              //如果值为真  表示所有动作都已经完成 可以停止定时器了
-		for( var attr in json ){
-			var current = 0;
-			if( attr == "opacity" ){                 //透明度
-				current = parseFloat( getStyle(obj,attr) ) * 100;
-			}else if( attr == "zIndex" ){
-				current = parseInt( getStyle(obj,attr) ) ;
-			}else{
-				current = parseInt( getStyle(obj,attr) ) ; 
-			}
-			
-			var speed = (json[attr]-current)/10;
-			speed = speed>0 ? Math.ceil(speed) : Math.floor(speed);
-			if( current!=json[attr] ){//没有达到目标值  将开关变成false
-				flag = false;
-			} 
-			
-			if( attr == "opacity" ){ //透明度的操作
-				obj.style[attr] = (current + speed) / 100;
-			}else if( attr == "zIndex" ){
-				obj.style[attr] = json[attr];
-			}else{
-				obj.style[attr] = current + speed + "px";
-			}
+//得到时间
+	function GetTime(){
+		this.init = function(){
+			setInterval( this.time , 1000 )
 		}
-	
-		//如果flag值为真  表示所有动作都已经完成 可以停止定时器了
-		if( flag ){
-			clearInterval( obj.timer );
-			//上个动作结束后进入下一个动作   
-			if( callback ){
-				callback();
-			}
+		this.time = function(){
+			var d = new Date();
+			var y = d.getFullYear();
+			var m = d.getMonth()+1;
+			var h = d.getHours();
+			var min = d.getMinutes();
+			var s = d.getSeconds();
+//			var _date = toTwo(d.getDate())
+			var x = 0;
+			var _date = d.getDate();
+			var html = ""
+			var arr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+			html= y+"."+m+"."+_date+" "+h+"."+min+"."+s;
+			$(".bottom_time").html( html )
 		}
-	},30)
-}
-
-
-//获取非行内元素样式    实际值  
-function getStyle(obj,attr){ 
-	if( getComputedStyle ){
-		return window.getComputedStyle(obj,false)[attr];
-	}else{
-		return obj.currentStyle[attr];
 	}
-}
+	
+//end_banner 轮播
+	function EndBanner(){
+		this.obj = $(".end_banner").children();
+		this.index = 0;
+		this.timer = null;
+		this.init = function(){
+			this.timer = setInterval( this.autoPlay,2000 );
+			this.mouseEnter();
+		};
+		this.autoPlay = function(){
+			this.index++;
+			if( this.index == 5 ){
+				this.index = 0;
+			}
+			console.log()
+			this.obj.eq(this.index).animate({"opacity":1},1000)
+					.siblings().animate({"opacity":0},1000)
+		}.bind(this);
+		this.mouseEnter = function(){
+			this.obj.mouseenter(function(){
+				clearInterval( this.timer )
+			}.bind(this));
+			this.obj.mouseleave(function(){
+				this.timer = setInterval( this.autoPlay,2000 );
+			}.bind(this));
+		}
+	}
 
-/*--------------------抛物线函数-------------------*/
-//确定三点坐标
-// 		var startPoint = {
-// 			x : addCart.offsetLeft + addCart.offsetWidth/2,
-// 			y : addCart.offsetTop
-// 		}
-// 		var endPoint = {
-// 			x : shopCart.offsetLeft + shopCart.offsetWidth/2,
-// 			y : shopCart.offsetTop
-// 		}
-// 		var topPoint = {
-// 			x : endPoint.x - 100,
-// 			y :endPoint.y - 80
-// 		}
-// 		
-//根据三点坐标确定抛物线系数
-//(startPoint.y - topPoint.y) * (startPoint.x - endPoint.x)) / ((startPoint.x * startPoint.x - endPoint.x * endPoint.x) * (startPoint.x - topPoint.x)-(startPoint.x * startPoint.x - topPoint.x * topPoint.x) * (startPoint.x - endPoint.x));  
-		
-//		var b = ((endPoint.y - startPoint.y) - a * (endPoint.x * endPoint.x - startPoint.x * startPoint.x)) / (endPoint.x - startPoint.x);  
-		
-//		var c = startPoint.y - a * startPoint.x * startPoint.x - b * startPoint.x;
+//判断购物车里有多少东西
+	function shopNum(){
+		this.init = function(){
+			var sum = $.cookie("sum")
+			$("#junpCar p").eq(0).find("span").html( sum )
+			$("#head_myshopcar>ul>li").eq(0).find("span").html( sum )
+		}
+	}
+	
+//跳转
+	function JunpHtml(){
+		$("#head_myshopcar,#junpCar").click(function(){
+			location.href = "shopCar.html"
+		}).mouseenter(function(){
+			$(this).css("cursor","pointer")
+		});
+	}
+	
+//购物车广告滚动
+	function CarBoard(){
+		this.body = $("#carList ul");
+		this.index = 0;
+		this.init = function(){
+			this.timer = setInterval( this.autoPlay , 3000 )
+		}
+		this.autoPlay = function(){
+			this.index++;
+			if( this.index == this.body.children().size() ){
+				this.index = 0
+			}
+			this.body.animate({"top":-20*this.index-8},500)
+		}.bind(this)
+	}
+//最上端置顶
+	function BodyTop(){
+		this.init = function(){//$("body,html")
+			$(window).scroll(function(){
+				$("#red_bar_td").css({"position":"fixed","top":0,"left":0,"right":0,"z-index":3})
+			})
+			this.blik();
+		}
+		this.blik = function(){
+			var that = this
+			$("#red_bar_td a").fadeOut(2000,function(){
+				$(this).fadeIn(2000,function(){
+					that.blik();
+				})
+			})
+		}
+	}
+//Nav 国家语言显示
+	function Nav(){
+		this.init = function(){
+			$(".head_middle_country").stop().mouseenter(function(){
+				$("#header_middle_menu").stop().slideDown(500);
+			})
+			$(".head_middle_country").mouseleave(function(){
+				$("#header_middle_menu").stop().slideUp(500)
+			})
 
+			$(".head_middle_language").stop().mouseenter(function(){
+				$("#head_language_menu").slideDown(500)
+				$("#head_language_menu a").animate({"top":0},500)
+			}).mouseleave(function(){
+				$("#head_language_menu").stop().slideUp(500);
+				$("#head_language_menu a").animate({"top":-30},500)
+			})
+			this.NavMiddle()
+		}
+		
+		this.NavMiddle = function(){
+			$(".nav_middle_01").focus(function(){
+				$(this).attr("value","");
+			}).blur(function(){
+				if( !$(this).val() ){
+				$(this).attr("value"," 输入关键词 或 货品编号 ");	
+				}
+			})
+		}
+		
+	}

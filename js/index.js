@@ -1,161 +1,7 @@
-window.onload= function(){
-	new Nav().init();           //Nav 国家语言显示
-	new BodyTop().init();       //最上端置顶
-	new LunBo().init();         //轮播图
-	new PaiList().init();       //sideNav
 	new shpLiF().init();        //选项卡,请求ajax
-	new EndBanner().init();     //右下角广告
-	new GetName().init();	    //左下角时间
-	new CarBoard().init();      //head购物篮广告
-	new JunpHtml()              //页面跳转
-	new shopNum().init()        //判断购物车有多少东西
-}
-//判断购物车里有多少东西
-	function shopNum(){
-		this.init = function(){
-			var arr = this.getCookie("sum")
-//			alert( arr )
-			$("#junpCar p").eq(0).find("span").html( arr )
-		}
-		
-		this.getCookie = function(key){
-			cookie_info = document.cookie;
-			if (cookie_info) {
-				list = cookie_info.replace(/;\s/g,";").split(';');
-				for (var i=0;i<list.length;i++) {
-					item = list[i].split('=');
-					if (item[0] == key) {
-						oldCookie = item[1];
-						return JSON.parse(oldCookie);
-					}
-				}
-				return [];
-			}
-			return [];
-		}
-	}
-//跳转
-	function JunpHtml(){
-		$("#head_myshopcar,#junpCar").click(function(){
-			location.href = "html/shopCar.html"
-		}).mouseenter(function(){
-			$(this).css("cursor","pointer")
-		});
-	}
-//判断是否登录成功
-//	function EnterUser(){
-//		this.init = function(){
-//			if( this.getCookie("enterOk") ){
-//				alert("找到了")
-//			}else{
-//				alert("没找到")
-//			}
-//		}
-//		this.getCookie = function(key){
-//			cookie_info = document.cookie;
-//			if (cookie_info) {
-//				list = cookie_info.replace(/;\s/g,";").split(';');
-//				for (var i=0;i<list.length;i++) {
-//					item = list[i].split('=');
-//					if (item[0] == key) {
-//						oldCookie = item[1];
-//						return JSON.parse(oldCookie); 
-//					}
-//				}
-//				return [];
-//			}
-//			return [];
-//		}
-//	}
-//购物城广告滚动
-	function CarBoard(){
-		this.body = $("#carList ul");
-		this.index = 0;
-		this.init = function(){
-			this.timer = setInterval( this.autoPlay , 3000 )
-		}
-		this.autoPlay = function(){
-			this.index++;
-			if( this.index == this.body.children().size() ){
-				this.index = 0
-			}
-			this.body.animate({"top":-20*this.index-8},500)
-		}.bind(this)
-	}
-//得到时间
-	function GetName(){
-		this.init = function(){
-			setInterval( this.time , 1000 )
-		}
-		this.time = function(){
-			var d = new Date();
-			var y = d.getFullYear();
-			var m = d.getMonth()+1;
-			var h = d.getHours();
-			var min = d.getMinutes();
-			var s = d.getSeconds()
-			var _date = toTwo(d.getDate())
-			var html = ""
-			var arr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
-			html= y+"."+m+"."+_date+" "+h+"."+min+"."+s;
-			$(".bottom_time").html( html )
-		}
-	}
-//Nav 国家语言显示
-	function Nav(){
-		this.init = function(){
-			$(".head_middle_country").stop().mouseenter(function(){
-				$("#header_middle_menu").stop().slideDown(500);
-			})
-			$(".head_middle_country").mouseleave(function(){
-				$("#header_middle_menu").stop().slideUp(500)
-			})
-			
-			
-			$(".head_middle_language").stop().mouseenter(function(){
-				$(".head_language_menu").stop().slideDown(500)
-			})
-			$(".head_middle_language").mouseleave(function(){
-				var flag = true;
-				if( flag ){
-					$(".head_language_menu").mouseleave(function(){
-						$(".head_language_menu").stop().slideUp(500)
-					})
-				}
-			})
-			
-			
-			this.NavMiddle()
-		}
-		
-		this.NavMiddle = function(){
-			$(".nav_middle_01").focus(function(){
-				$(this).attr("value","");
-			}).blur(function(){
-				if( !$(this).val() ){
-				$(this).attr("value"," 输入关键词 或 货品编号 ");	
-				}
-			})
-		}
-		
-	}
-//最上端置顶
-	function BodyTop(){
-		this.init = function(){
-			$(document).scroll(function(){
-				$("#red_bar_td").css({"position":"fixed","top":0,"left":0,"right":0,"z-index":3})
-			})
-			this.blik();
-		}
-		this.blik = function(){
-			var that = this
-			$("#red_bar_td a").fadeOut(2000,function(){
-				$(this).fadeIn(2000,function(){
-					that.blik();
-				})
-			})
-		}
-	}
+	new PaiList().init();       //sideNav
+	new LunBo().init();         //轮播图
+
 //轮播图
 	function LunBo(){
 		this.index = 0 ;
@@ -223,19 +69,19 @@ window.onload= function(){
 			var index = index
 			$.ajax({
 			type : "get",
-			url : "json/index.json",
+			url : "../json/index.json",
 			success : function(json){
 				var html = "";
 				for( var attr in json["shopList_"+(index+1)].list ){
 					var item = json["shopList_"+(index+1)].list[attr];
 					html += `<ul>
 								<li class="shopBox_li_01">
-									<a href="html/details.html?fL=${"shopList_"+(index+1)}&id=${item.id}">
-										<img src="images/index/shopList/${item.src1}"/>
+									<a href="details.html?fL=${"shopList_"+(index+1)}&id=${item.id}">
+										<img src="../images/index/shopList/${item.src1}"/>
 									</a>
 								</li>
 								<li class="shopBox_li_02">
-									<img src="images/index/shopList/${item.src2}"/>
+									<img src="../images/index/shopList/${item.src2}"/>
 								</li>
 								<li class="shopBox_li_03">
 									<p><a href="">${item.p1}</a></p>
@@ -267,30 +113,3 @@ window.onload= function(){
 		}
 	}
 
-//end_banner 轮播
-	function EndBanner(){
-		this.obj = $(".end_banner").children();
-		this.index = 0;
-		this.timer = null;
-		this.init = function(){
-			this.timer = setInterval( this.autoPlay,2000 );
-			this.mouseEnter();
-		};
-		this.autoPlay = function(){
-			this.index++;
-			if( this.index == 5 ){
-				this.index = 0;
-			}
-			console.log()
-			this.obj.eq(this.index).animate({"opacity":1},1000)
-					.siblings().animate({"opacity":0},1000)
-		}.bind(this);
-		this.mouseEnter = function(){
-			this.obj.mouseenter(function(){
-				clearInterval( this.timer )
-			}.bind(this));
-			this.obj.mouseleave(function(){
-				this.timer = setInterval( this.autoPlay,2000 );
-			}.bind(this));
-		}
-	}
